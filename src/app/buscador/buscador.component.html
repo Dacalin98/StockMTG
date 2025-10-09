@@ -1,17 +1,26 @@
 <p>buscador works!</p>
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label>Number</mat-label>
+<form>
+  <mat-form-field  style="width: 20%;">
+    <mat-label>Carta</mat-label>
     <input type="text"
-           placeholder="Pick one"
            aria-label="Number"
            matInput
-           [formControl]="myControl"
-           [matAutocomplete]="auto">
+           [formControl]="buscadorControl"
+           [matAutocomplete]="auto"
+           (ngModelChange)="actualizarListaCartas(buscadorControl.value)" >
     <mat-autocomplete #auto="matAutocomplete">
-      @for (option of filteredOptions | async; track option) {
-        <mat-option [value]="option">{{option}}</mat-option>
-      }
+      @for (carta of opcionesBusqueda; track carta) {
+<mat-option
+  [value]="carta.name"
+  style="display: flex; align-items: center; gap: 10px; background-color: #fff; font-size: 18px; padding: 5px 10px;"
+>
+  <img
+    *ngIf="carta.image_uris?.art_crop"
+    [src]="carta.image_uris?.art_crop"
+    style="height: 40px; width: 40px; object-fit: cover; border-radius: 4px;"
+  />
+  <span>{{ carta.name }}</span>
+</mat-option>      }
     </mat-autocomplete>
   </mat-form-field>
 </form>

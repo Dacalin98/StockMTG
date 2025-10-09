@@ -6,6 +6,10 @@ import { AsyncPipe } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgIf } from '@angular/common';
+import { MatCommonModule } from '@angular/material/core';
+import { Carta } from '../models/carta.model';
+import { BuscarCartasService } from '../services/carta-service/carta-service';
 
 @Component({
   selector: 'app-buscador',
@@ -17,27 +21,29 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
+    NgIf,
+    MatCommonModule,
   ],
   templateUrl: './buscador.component.html',
   styleUrls: ['./buscador.component.css'],
 })
 export class BuscadorComponent implements OnInit {
-  myControl = new FormControl('');
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]> | undefined;
+  constructor(private buscarCartasService: BuscarCartasService) {}
 
-  ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value || ''))
-    );
-  }
+  buscadorControl = new FormControl('');
+  opcionesBusqueda: Carta[] = [];
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  ngOnInit() {}
 
-    return this.options.filter((option) =>
-      option.toLowerCase().includes(filterValue)
-    );
+  actualizarListaCartas(texto: string | null) {
+    if (texto === null || texto.length < 3) {
+      this.opcionesBusqueda = [];
+      return;
+    }
+    this.buscarCartasService
+      .buscarCartasPorNombre(texto)
+      .subscribe((cartas: Carta[]) => {
+        this.opcionesBusqueda = cartas;
+      });
   }
 }

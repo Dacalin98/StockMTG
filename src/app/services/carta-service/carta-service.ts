@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { Carta } from '../../models/carta.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,11 +20,13 @@ export class BuscarCartasService {
   }
 
   buscarCartasPorNombre(nombre: string): Observable<any> {
-    const params = { q: nombre };
-    return this.realizarBusqueda(params, 'search');
+    const params = { q: nombre, unique: 'cards' ,lang: 'es'};
+    return this.realizarBusqueda(params, 'search').pipe(
+      map((response: any) => response.data)
+    );
   }
-
-  obtenerCartaCompleta(nombre: string): Observable<any> {
+  
+  obtenerCartaCompleta(nombre: string): object {
     const params = { exact: nombre };
     return this.realizarBusqueda(params, 'named');
   }
