@@ -1,0 +1,18 @@
+::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
+    white-space: normal;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    text-decoration: inherit;
+    text-transform: inherit;
+    margin-right: auto;
+    display: flex !important;
+    align-items: center !important
+}
+
+img {
+        height: 4em;
+        margin-right: 1.5em;
+}

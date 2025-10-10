@@ -1,1 +1,19 @@
-<p>carta-descripcion works!</p>
+<div class="carta-container">
+  <div class="carta-imagen">
+    <img
+      [src]="carta?.image_uris?.normal || carta?.card_faces?.[0]?.image_uris?.normal || 'https://via.placeholder.com/250x350?text=No+Image'"
+      [alt]="carta?.name"
+    />
+  </div>
+
+  <div class="carta-info">
+    <h2 class="carta-nombre">{{ carta?.name }}</h2>
+    <p class="carta-texto">{{ carta?.oracle_text || 'Sin descripción disponible.' }}</p>
+
+    <div class="inventario">
+      <button class="btn-inv" (click)="disminuir()">−</button>
+      <input type="number" class="cantidad" value="{{ cantidad }}">
+      <button class="btn-inv" (click)="aumentar()">+</button>
+    </div>
+  </div>
+</div>

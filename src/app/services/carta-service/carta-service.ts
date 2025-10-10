@@ -22,7 +22,8 @@ export class BuscarCartasService {
   buscarCartasPorNombre(nombre: string): Observable<any> {
     const params = { q: nombre, unique: 'cards' ,lang: 'es'};
     return this.realizarBusqueda(params, 'search').pipe(
-      map((response: any) => response.data)
+      map((response: any) => response.data || []),
+      map((data: any[]) => data.map((cartaData) => new Carta(cartaData)))
     );
   }
   

@@ -1,0 +1,77 @@
+.carta-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8f9fa;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: 280px;
+  padding: 1rem;
+}
+
+
+.carta-imagen img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.carta-info {
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+.carta-nombre {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+.carta-texto {
+  font-size: 0.95rem;
+  color: #555;
+  min-height: 3em;
+  margin-bottom: 0.8rem;
+}
+
+.inventario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-inv {
+  background-color: #673ab7;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  border-radius: 0.4rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-inv:hover {
+  background-color: #512da8;
+}
+
+.cantidad {
+  font-size: 1.1rem;
+  font-weight: bold;
+  min-width: 1.5rem;
+  text-align: center;
+}
+input{
+  width: 50px;
+  text-align: center;
+  -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
