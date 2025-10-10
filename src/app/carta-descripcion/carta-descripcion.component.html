@@ -8,7 +8,7 @@
 
   <div class="carta-info">
     <h2 class="carta-nombre">{{ carta?.name }}</h2>
-    <p class="carta-texto">{{ carta?.oracle_text || 'Sin descripción disponible.' }}</p>
+    <div class="carta-texto" [innerHTML]="textoHTML??'\<p>Sin descripción disponible.\</p>'"></div>
 
     <div class="inventario">
       <button class="btn-inv" (click)="disminuir()">−</button>
