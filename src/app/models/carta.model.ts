@@ -34,6 +34,7 @@ export class Carta {
       border_crop: string;
     };
   }>;
+  cantidad?: number;
 
   constructor(data: Partial<Carta>) {
     this.id = data.id;
@@ -45,7 +46,8 @@ export class Carta {
     this.rarity = data.rarity;
     this.colors = data.colors;
     this.color_identity = data.color_identity;
-    this.image_uris = data.image_uris;
+    this.image_uris =
+      data.image_uris ?? data.card_faces?.[0]?.image_uris ?? undefined;
     this.mana_cost = data.mana_cost;
     this.oracle_text = data.oracle_text;
     this.price = data.price;
@@ -54,6 +56,7 @@ export class Carta {
     this.toughness = data.toughness;
     this.lang = data.lang;
     this.card_faces = data.card_faces;
+    this.cantidad = data.cantidad ?? 0;
   }
 
   static fromJson(json: any): Carta {

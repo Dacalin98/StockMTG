@@ -12,8 +12,9 @@
 
     <div class="inventario">
       <button class="btn-inv" (click)="disminuir()">−</button>
-      <input type="number" class="cantidad" value="{{ cantidad }}">
+      <input type="number" class="cantidad" [(ngModel)]="cantidad">
       <button class="btn-inv" (click)="aumentar()">+</button>
     </div>
   </div>
 </div>
+<button (click)="actualizar()">Actualizar</button>
