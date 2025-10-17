@@ -31,4 +31,6 @@ export class BuscarCartasService {
     const params = { exact: nombre };
     return this.realizarBusqueda(params, 'named');
   }
+
+  
 }

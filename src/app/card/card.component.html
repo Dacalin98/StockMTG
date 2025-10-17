@@ -1,0 +1,8 @@
+<a [routerLink]="['/detalles']">
+<div class="card" (click)="irADetalles(data)" >
+  <img [src]="data.image_uris?.border_crop" [alt]="data.name" class="card-img" />
+  <div class="card-info">
+    <h3 class="card-name">{{ data.name }}</h3>
+    <p class="card-cantidad">Cantidad: {{ data.cantidad }}</p>
+  </div>
+</div></a>

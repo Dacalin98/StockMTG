@@ -8,13 +8,17 @@
 
   <div class="carta-info">
     <h2 class="carta-nombre">{{ carta?.name }}</h2>
-    <div class="carta-texto" [innerHTML]="textoHTML??'\<p>Sin descripción disponible.\</p>'"></div>
+    <div class="carta-texto" [innerHTML]="textoHTML ?? '<p>Sin descripción disponible.</p>'"></div>
 
-    <div class="inventario">
+    <div class="carta-acciones">
+      <div class="inventario">
       <button class="btn-inv" (click)="disminuir()">−</button>
-      <input type="number" class="cantidad" [(ngModel)]="cantidad">
+      <input type="number" class="cantidad" [(ngModel)]="cantidad" />
       <button class="btn-inv" (click)="aumentar()">+</button>
     </div>
+
+    <button class="btn-actualizar" (click)="actualizar()">Actualizar</button>
+    </div>
+    
   </div>
 </div>
-<button (click)="actualizar()">Actualizar</button>

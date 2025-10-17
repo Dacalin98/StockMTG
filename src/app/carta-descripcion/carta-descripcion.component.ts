@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-carta-descripcion',
-  imports: [NgClass, FormsModule],
+  imports: [FormsModule],
   templateUrl: './carta-descripcion.component.html',
   styleUrl: './carta-descripcion.component.css',
 })
@@ -37,6 +37,7 @@ export class CartaDescripcionComponent {
       JSON.parse(localStorage.getItem('cartaSeleccionada') || 'null');
     this.procesarTexto();
     this.textoHTML = this.sanitizer.bypassSecurityTrustHtml(this.texto);
+    this.cantidad = this.carta?.cantidad || 0;
   }
   aumentar() {
     this.cantidad++;

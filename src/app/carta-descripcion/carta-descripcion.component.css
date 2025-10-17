@@ -1,77 +1,195 @@
 .carta-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #f8f9fa;
+  align-items: flex-start;
+  gap: 1.5rem;
+  background: #ffffff;
   border-radius: 1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  width: 280px;
-  padding: 1rem;
-}
-
-
-.carta-imagen img {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
   width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
+  height: 60vh;
+  margin: 2rem auto;
+  box-sizing: border-box;
 }
 
-.carta-info {
-  text-align: center;
-  margin-top: 0.75rem;
-}
-
-.carta-nombre {
-  font-size: 1.4rem;
-  font-weight: bold;
-  margin-bottom: 0.4rem;
-  color: #333;
-}
-
-.carta-texto {
-  font-size: 0.95rem;
-  color: #555;
-  min-height: 3em;
-  margin-bottom: 0.8rem;
-}
-
-.inventario {
+/* Imagen */
+.carta-imagen {
+  flex: 0 0 20%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    border-radius: 0.6rem;
+    object-fit: contain;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
 }
 
-.btn-inv {
-  background-color: #673ab7;
+/* Contenido */
+.carta-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  min-width: 0;
+  height: 100%;
+}
+
+/* Nombre */
+.carta-nombre {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.6rem;
+  word-break: break-word;
+}
+
+/* Texto */
+.carta-texto {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  flex-grow: 1; /* ocupa el espacio intermedio */
+  overflow-y: auto; /* 💡 scroll si el texto es largo */
+  padding-right: 0.5rem;
+
+  p {
+    margin: 0;
+  }
+}
+
+/* Inventario */
+.inventario {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+
+  .btn-inv {
+    background: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #005fa3;
+    }
+
+    &:active {
+      background: #004b82;
+    }
+  }
+
+  .cantidad {
+    width: 60px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+
+    &:focus {
+      border-color: #0078d7;
+    }
+
+    /* quitar flechas del input number */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    &[type="number"] {
+      -moz-appearance: textfield;
+    }
+  }
+}
+.carta-acciones {
+  display: flex;
+  flex-direction: column; /* apilar elementos verticalmente */
+  gap: 1rem;              /* espacio entre elementos */
+  margin-top: 1rem;
+  align-items: flex-start; /* mantener la columna pegada a la izquierda */
+  width: max-content;      /* ancho mínimo necesario para los hijos */
+}
+
+/* Contenedor interno centrado */
+.carta-acciones > * {
+  align-self: center; /* centra cada hijo horizontalmente dentro de carta-acciones */
+}
+
+/* Inventario */
+.inventario {
+  display: flex;
+  align-items: center; /* centra verticalmente input y botones */
+  gap: 0.5rem;
+}
+
+/* Botones */
+button {
+  padding: 0.6rem 1.4rem;
+  background: #28a745;
   color: white;
   border: none;
-  font-size: 1.2rem;
-  border-radius: 0.4rem;
-  width: 2.2rem;
-  height: 2.2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background 0.2s ease;
 }
 
-.btn-inv:hover {
-  background-color: #512da8;
+button:hover {
+  background: #1e7e34;
 }
 
-.cantidad {
-  font-size: 1.1rem;
-  font-weight: bold;
-  min-width: 1.5rem;
-  text-align: center;
+/* Botones de inventario */
+.btn-inv {
+  margin: 0;
 }
-input{
-  width: 50px;
-  text-align: center;
-  -moz-appearance:textfield;
-}
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+
+
+/* Responsive */
+@media (max-width: 700px) {
+  .carta-container {
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: auto; /* en móvil mejor dejar que crezca */
+  }
+
+  .carta-imagen {
+    flex: 0 0 auto;
+    width: 80%;
+  }
+
+  .carta-info {
+    text-align: center;
+    align-items: center;
+  }
+
+  .inventario {
+    justify-content: center;
+  }
+
+  button {
+    align-self: center;
+  }
 }
