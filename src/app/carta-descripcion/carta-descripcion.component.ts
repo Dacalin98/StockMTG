@@ -5,10 +5,12 @@ import { NgClass } from "@angular/common";
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ConexionJSONService } from '../services/conexion-json/conexion-json.service';
 import { FormsModule } from '@angular/forms';
+import { firstValueFrom } from 'rxjs';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-carta-descripcion',
-  imports: [FormsModule],
+  imports: [FormsModule, NgClass, NgIf],
   templateUrl: './carta-descripcion.component.html',
   styleUrl: './carta-descripcion.component.css',
 })
@@ -18,6 +20,8 @@ export class CartaDescripcionComponent {
     private sanitizer: DomSanitizer,
     private conexionJSONService: ConexionJSONService
   ) {}
+
+  cantidadOriginal = 0;
 
   actualizar() {
     this.carta!.cantidad = this.cantidad;
@@ -30,21 +34,33 @@ export class CartaDescripcionComponent {
   texto: string = '';
   textoHTML: SafeHtml | undefined;
 
-  ngOnInit(): void {
-    console.log(document.cookie);
-    this.carta =
-      this.comunicacionService.cartaSeleccionada ??
-      JSON.parse(localStorage.getItem('cartaSeleccionada') || 'null');
+  async ngOnInit(): Promise<void> {
+    var id =
+      this.comunicacionService.cartaSeleccionada?.id ??
+      JSON.parse(localStorage.getItem('cartaSeleccionada') || 'null').id;
+    const data = await firstValueFrom(
+      this.conexionJSONService.obtenerCarta(id)
+    );
+    if (data.carta !== null) {
+      this.carta = data.carta;
+      this.cantidadOriginal = this.carta?.cantidad || 0;
+    } else {
+      this.carta = JSON.parse(
+        localStorage.getItem('cartaSeleccionada') || 'null');
+    }
+
     this.procesarTexto();
     this.textoHTML = this.sanitizer.bypassSecurityTrustHtml(this.texto);
     this.cantidad = this.carta?.cantidad || 0;
   }
   aumentar() {
     this.cantidad++;
+    this.actualizar();
   }
 
   disminuir() {
     if (this.cantidad > 0) this.cantidad--;
+    this.actualizar();
   }
 
   procesarTexto() {
@@ -61,5 +77,9 @@ export class CartaDescripcionComponent {
       '</p>';
     this.texto = this.texto.replaceAll('\n', '<br/>');
     return;
+  }
+  deshacer() {
+    this.cantidad = this.cantidadOriginal;
+    this.actualizar();
   }
 }

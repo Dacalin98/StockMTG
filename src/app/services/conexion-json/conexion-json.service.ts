@@ -12,7 +12,8 @@ export class ConexionJSONService {
 
   actualizarOAnadir(carta: Carta) {
     const params = {
-        carta:JSON.stringify(carta)    };
+      carta: JSON.stringify(carta),
+    };
     return this.http.post<any>(this.url + 'actualizarCarta', params);
   }
 
@@ -20,4 +21,11 @@ export class ConexionJSONService {
     return this.http.get<any>(this.url + 'cartas');
   }
 
+  obtenerCarta(id: string='') {
+    const params = {
+      id: id
+    };
+    return this.http.get<any>(this.url + 'carta', {params: params});
+
+  }
 }

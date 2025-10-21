@@ -11,7 +11,6 @@ export class ComunicacionService {
   public cartaSeleccionada: Carta | null = null;
 
   cambiarCartaSeleccionada(carta: Carta) {
-    this.cartaSeleccionada = carta;
     localStorage.setItem('cartaSeleccionada', JSON.stringify(carta));
   }
 }

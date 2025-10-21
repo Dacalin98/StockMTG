@@ -12,13 +12,11 @@
 
     <div class="carta-acciones">
       <div class="inventario">
+        
       <button class="btn-inv" (click)="disminuir()">−</button>
-      <input type="number" class="cantidad" [(ngModel)]="cantidad" />
+      <input type="number" class="cantidad" (change)="actualizar()" [(ngModel)]="cantidad" />
       <button class="btn-inv" (click)="aumentar()">+</button>
-    </div>
-
-    <button class="btn-actualizar" (click)="actualizar()">Actualizar</button>
-    </div>
-    
+      <button *ngIf="cantidad!=cantidadOriginal" class="btn-actualizar" (click)="deshacer()">Deshacer</button>
+   
   </div>
 </div>
